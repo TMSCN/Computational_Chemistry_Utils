@@ -1,6 +1,6 @@
 ### How to use the Scale_Generator.py?
 1. `Python 3` is required. Then, make sure package `Scipy` is installed (Versions later than 1.8.1 are recommended). If not, you can use `pip` to download it in the terminal.
-2. Download the `Scale_Generator.py` and choose an rar file`*__output_XX.rar` with Gaussian16 output files `*.log` from test sets. DFT functional and basis sets are labelled, and the number at the end of filename is the amount of molecules in test sets.
+2. Download the `Scale_Generator.py` and choose an rar file`*__output_XX.rar` with Gaussian16 output files `*.log` from test sets. QC method and basis sets are labelled, and the number at the end of filename is the amount of molecules in test sets.
 3. Extract the downloaded rar file in a directory with `Scale_Generator.py`.
 4. Run `Scale_Generator.py`, and a `scaleRes.out` file will be generated. The calculated harmonic frequency scale factors are at the end of the `scaleRes.out`. If error occurs from `scipy.minimize`, please modify the value of `guess` and rerun.
 Note: Temporarily, this program only support output files (__`*.log`__) from `Gaussian`. Other QC softwares are not supported.
