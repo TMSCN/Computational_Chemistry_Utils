@@ -38,7 +38,7 @@ testSetExp = {
     'CH3Cl':[732, 1017, 1017, 1355, 1452, 1452, 2937, 3039, 3039],
     'PH':[2276],
     'SH':[2592]
-} # 测试集实验频率，ref: Shimanouchi, T. J. Phys. Chem. Ref. Data 1977, 6, 993
+} # The experimental frequencies of the test sets, ref: Shimanouchi, T. J. Phys. Chem. Ref. Data 1977, 6, 993
 
 testSetExpZPE = {
     'H2':25.98,
@@ -81,7 +81,7 @@ def getZPETheorCount(Ex = testSetExpZPE):
             length -= 1
     return length
     
-def readFreq(e): #读取log文件中的理论谐振频率值
+def readFreq(e): # Read the DFT-calculated (harmonic) frequencies from Gaussian 16 .log files
     res = []
     e1 = e.split('normal coordinates:')[1]
     e2 = e1.split(' - Thermochemistry -')[0]
@@ -94,7 +94,7 @@ def readFreq(e): #读取log文件中的理论谐振频率值
                 res.append(data)
     return res
 
-def generateVibDict(): #生成测试集的理论谐振频率字典
+def generateVibDict(): # Generate a Dict with all DFT-calculated frequencies from test sets
     res = {}
     for filename in os.listdir(dir):
         if scriptor(filename) != 'log':
@@ -115,7 +115,7 @@ len_testSetExpVib = getVibCount()
 len_testSetTheorZPE = getZPETheorCount()
 len_testSetExpZPE = len(testSetExpZPE)
 
-def fundamentalFactor(Th = testSetTheor, Ex = testSetExp): #直接生成基频校正因子
+def fundamentalFactor(Th = testSetTheor, Ex = testSetExp): # Generate the scale factor of fundamental frequencies
     Sq = 0
     Cr = 0
     for mol in Th:
@@ -130,19 +130,19 @@ def fundamentalFactor(Th = testSetTheor, Ex = testSetExp): #直接生成基频�
             Sq += pow(vibT[i], 2)
     return Cr/Sq
 
-def ZPE(freqs):
+def ZPE(freqs): # Calculate the zero-point energy (ZPE) from a set of frequencies
     res = 0
     for v in freqs:
         res += v*Z
     return res
 
-def enthalpyVib(x): #振动内能，前面的常数省略了
-    return x/(m.exp(Ad*x) - 1)/10000 #为了保证优化算法成功运行在后边除以了10000
+def enthalpyVib(x): # Vibrational contributions to the thermal energy (U)
+    return x/(m.exp(Ad*x) - 1)/10000 #To avoid error report, the result is divided by 10000
 
-def entropyVib(x): #振动熵，前面的常数省略了
-    return Ad*x/(m.exp(Ad*x)-1) - m.log(1-m.exp(-Ad*x))
+def entropyVib(x): # Vibrational contributions to entropy (S)
+    return Ad*x/(m.exp(Ad*x)-1) - m.log(1-m.exp(-Ad*x)) #To avoid error report, the result is divided by 10000
 
-def ZPEError(x, lib = testSetExpZPE):
+def ZPEError(x, lib = testSetExpZPE): # Variance of ZPE
     D = 0
     for mol in lib:
         ZPE_Exp = lib[mol]
@@ -157,7 +157,7 @@ def ZPEError(x, lib = testSetExpZPE):
         D += pow(x*ZPE_Theor - ZPE_Exp,2)
     return D
     
-def enthalpyError(x, Th = testSetTheor, Ex = testSetExp): #振动焓残差平方和
+def enthalpyError(x, Th = testSetTheor, Ex = testSetExp): # Variance of U
     D = 0
     for mol in Th:
         vibT = Th[mol]
@@ -170,7 +170,7 @@ def enthalpyError(x, Th = testSetTheor, Ex = testSetExp): #振动焓残差平方
             D += pow(enthalpyVib(x*vibT[i]) - enthalpyVib(vibE[i]), 2)
     return D
 
-def entropyError(x, Th = testSetTheor, Ex = testSetExp): #振动熵残差平方和
+def entropyError(x, Th = testSetTheor, Ex = testSetExp): # Variance of S
     D = 0
     for mol in Th:
         vibT = Th[mol]
@@ -204,7 +204,7 @@ writeLog(fname, texts, 'w')
 
 fundamentalFactor =  fundamentalFactor()
 ZPEFactor = minimize(ZPEError, guess)
-enthalpyFactor = minimize(enthalpyError, guess) #寻找残差平方和的在x=guess附近的极小值点
+enthalpyFactor = minimize(enthalpyError, guess) #Find a minimum point around x=guess
 entropyFactor = minimize(entropyError, guess)
 LZPE = ZPEFactor.x[0]
 LU = enthalpyFactor.x[0]
