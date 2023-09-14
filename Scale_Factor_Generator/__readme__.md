@@ -12,7 +12,7 @@ However, for a certain normal mode, the calculated harmonic frequency is often h
 
 To determine the optimal value of scale factors for a certain level of computation (e.g. B3LYP/6-31G*, M06-2X/def2-SVP), a test set need establishing, in which many small molecules have their experimentally-confirmed frequencies. Thereafter, at the chosen level of computation, construct and perform geometry optimization & frequency analysis to each molecule in the test set. Having obtained both calculated and experimental frequencies, an error function (e.g. variance) about the scale factor can be established. Usually, the final scale factor equals the minimum point of the error function.
 
-To see how `Scale_Generator.py` works, you can also check the Supporting Information (page ) of the following paper:
+To see how `Scale_Generator.py` works, you can also check the Supporting Information (page S-42 ~ S-45) of the following paper:
 https://doi.org/10.1039%2FD3GC00344B
 
 If you want to learn more about the scale factor, I recommend you to read this document (by Merrick *et. al.*, 2006):
