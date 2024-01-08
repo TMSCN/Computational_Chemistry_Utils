@@ -43,14 +43,8 @@ In the `!Solve` block, the following parameters are set. Adjusting these paramet
 
 ### Explanations of custom functions
 There are several custom functions in the `!func` block, and they are:
-- `Keq(delG)`: Calculating the equilibrium constant $K^{o}$ from a given standard molar Gibbs free energy change ($\Delta G^{o}$, `delG`, unit: kcal/mol), using the isothermal equation:
-$$
-K^{o}=exp(-\Delta G^{o}/RT)
-$$
-- `kTST(bar)`: Calculating the rate constant $k^{TST}$ from a given standard molar Gibbs free energy change of activation ($\Delta G^{\ddagger}$, `bar`, unit: kcal/mol), using the transition-state theory (TST):
-$$
-k^{TST}=\frac{kT}{h(c^{o})^{n-1}} exp(-\Delta G^{\ddagger}/RT)
-$$
+- `Keq(delG)`: Calculating the equilibrium constant $K^{o}$ from a given standard molar Gibbs free energy change ($\Delta G^{o}$, `delG`, unit: kcal/mol), using the isothermal equation:$K^{o}=exp(-\Delta G^{o}/RT)$
+- `kTST(bar)`: Calculating the rate constant $k^{TST}$ from a given standard molar Gibbs free energy change of activation ($\Delta G^{\ddagger}$, `bar`, unit: kcal/mol), using the transition-state theory (TST):$k^{TST}=\frac{kT}{h(c^{o})^{n-1}} exp(-\Delta G^{\ddagger}/RT)$
 - `reqs(t,u)`: Containing the concentrations of all reagents, products, and intermediates, and interpreting all defined elementary reactions into differential rate equations, which essentially describe the dynamic behavior of the studied reaction system.
 - `test(t,u)`: Analogous to the `reqs(t,u)`, but it describes a much simpler reaction system, to test this program. It is unused and doesn't relate to the studied reaction system.
 
