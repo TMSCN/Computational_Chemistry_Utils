@@ -1,4 +1,4 @@
-#### What is required to run this program (Kinetic_Sim_Scipy.py)?
+### What is required to run this program (Kinetic_Sim_Scipy.py)?
 1. Ensure `Python3` has been installed on your system. `Python3.11` or later versions are recommended.
 2. Ensure the following Python extension packages have been installed. If any of them is absent, try to run the command `pip install <package_name>` or `python -m pip install <package_name>` on the terminal.  Command `pip list` can list out all the installed Python extension packages.
 	- `NumPy`(1.26.0 or greater)
