@@ -24,7 +24,9 @@ The `!Const` block records physic chemistry constants in SI units, and it should
 
 In the `!Paramters` block, the following parameters are set. Adjusting these parameters should make an impact on the final results:
 - The initial concentration of starting materials: `c_Ni_0`, `c_init_R1`, `c_init_R2` (mol/L)
+
 **Note**: The `U0` in the `!Solve` block is the variable that directly controls the initial concentrations of all reagents, intermediates, and products. `c_Ni_0`, `c_init_R1`, `c_init_R2` are contained in `U0`.
+
 - Temperature: `Temp` (K)
 - Reaction current: `I_eff` (A)
 - Reaction volume: `Vol` (L)
@@ -32,6 +34,7 @@ In the `!Paramters` block, the following parameters are set. Adjusting these par
 - Forward equilibrium constants of defined elementary reactions: `K_*`
 - Total simulation duration: `Tot_t`(s)
 - Accuracy of the simulated curve: `Acc` (Must be greater than 0)
+
 **Note**: The last parameter `Acc` changes the time interval to solve differential rate equations numerically, and also the time interval to record concentration changes in `res.csv`. The lesser `Acc` is, the finer the time interval is. However, increasing `Acc` (not too much!) may just cause slight or negligible changes in time-dependent concentrations and curves. **Therefore, to make this program proceed faster, it's firstly recommended to tenfold increase the `Acc` value with other parameters unchanged.**
 
 In the `!Solve` block, the following parameters are set. Adjusting these parameters does not change the essential results, but changes how to display results:
